@@ -1,5 +1,5 @@
 # A hitch-hikers guide to [ASPeKT]
-## Peter Lorimer - Oct 30, 2018
+### Peter Lorimer - Oct 30, 2018
 
 ### Abstract
 Do you have an idea for an open source project? Have you thought about opening an idea to the community? If so, then this talk is for you! If not, and you dream about code or even think about it sometimes, this talk is still for you! Heck, if you have a computer come listen.
