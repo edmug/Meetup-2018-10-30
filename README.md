@@ -1,69 +1,13 @@
-[ASPeKT]
-===
+# A hitch-hikers guide to [ASPeKT]
+## Peter Lorimer - Oct 30, 2018
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ysr9ebr6dwaqamus?svg=true)](https://ci.appveyor.com/project/mvpete/aspekt)
+### Abstract:
+Do you have an idea for an open source project? Have you thought about opening an idea to the community? If so, then this talk is for you! If not, and you dream about code or even think about it sometimes, this talk is still for you! Heck, if you have a computer come listen.
 
-A lightweight (Aspect Oriented Programming) AOP foundation
+In this talk, I will wade through the motivations, challenges, and some grimy details of developing [ASPeKT] (https://github.com/mvpete/aspekt). The trials and tribulations of an open source, NuGet available library that I created over a year ago. From what started as something that was a fun challenge, to something that is available on NuGet. I will examine the steps I took to take an idea from conception to reality, the problems I faced, and the tools I used. This isn't a success story, this is a reality story, from the mouth of a guy with a passion for code, and an affinity for development.
 
-### Overview
-Aspekt is a small AOP foundation library written in C#. Aspect Oriented Programming (AOP) allows to ease the pain associated with cross-cutting concerns. A cross-cutting concern is a pattern that gets across a program that cannot easily be factored into its own module. This raises the so called signal-to-noise ratio. One common cross cutting concern is logging, when logging entry/exit/exception of a function, the code becomes cluttered with log code and the intent can become lost. Aspekt addresses these concerns, by using attributes as annotation of functions. Like PostSharp aspect utilizes Mono.Cecil to post process the .NET binaries, inserting the aspects post build.
+### Speaker Bio:
+When I was 7, I wrote on my report card "I like computers. I like gym." not much has changed since then. My name is Peter Lorimer, a C++ developer by trade, C# developer for fun, and an avid fitness enthusiast. A self-proclaimed Microsoft fan boy, I might be the last known user of the "Windows Phone" platform. Blog: https://unparalleledadventure.wordpress.com
 
-### Usage
-
-The foundation of Aspekt is the base Aspect. In order to utilize Aspects, just derive from Aspekt.Aspect and implement the OnEntry, OnExit, OnException methods. Aspekt will only call the calls implemented on the class i.e. OnEntry, OnExit, OnException -- the issue here now becomes inheritence in Aspects...
-
-Also, no PDBs are generated.
-
-```csharp
-class SampleAspect : Aspekt.Aspect
-{
-   public SampleAspect(String val)
-   {
-   }
-
-   public OnEntry(MethodArgs ma)
-   {
-      // called before any existing code is ran
-   }
-
-   public OnExit(MethodArgs ma)
-   {
-     // called before ANY return statement
-   }
-
-   public OnException(MethodArgs ma, Exception e)
-   {
-     // called if existing codes excepts
-   }
-}
-```
-Aspekt re-writes methods in the following manner.
-```csharp
-class Foo
-{
-    [SampleAspect("Some Value")]
-    public void Bar(String s, int i)
-    {
-       MethodArgs ma = new MethodArgs("Bar", "Assembly.Foo.Bar(String s, int i)", new Arguments(new object[] { s, i }), this);
-       SampleAspect sa = new SampleAspect("Some Value");
-       sa.OnEntry(ma);
-       try
-       {
-           // original code
-           sa.OnExit(ma);
-       }
-       catch(Exception e)
-       {
-          sa.OnException(ma,e);
-       }
-    }
-}
- ```
- Aspekt tries not alter or modify existing code, so if the IL contains multiple returns, Aspekt calls OnExit before each return.
-
-Since Aspekt works post compile, in order to use it you must run the Bootstrap application against your assembly.
-    
-    > Aspekt.Bootstrap.Host [PathToAssembly] 
-
-This will process the assembly and add in the aspects to their respective members.
-
+### Resources
+This repository is a fork of Peter's [ASPeKT](https://github.com/mvpete/aspekt) project.
