@@ -10,4 +10,4 @@ In this talk, I will wade through the motivations, challenges, and some grimy de
 When I was 7, I wrote on my report card "I like computers. I like gym." not much has changed since then. My name is Peter Lorimer, a C++ developer by trade, C# developer for fun, and an avid fitness enthusiast. A self-proclaimed Microsoft fan boy, I might be the last known user of the "Windows Phone" platform. Blog: https://unparalleledadventure.wordpress.com
 
 ### Resources
-This repository is a fork of Peter's [ASPeKT](https://github.com/mvpete/aspekt) project.
+You can find the slides for the talk [here](A%20Hitch-Hikers%20Guide%20to%20%5BASPeKT%5D.pdf).  This repository is a fork of Peter's [ASPeKT](https://github.com/mvpete/aspekt) project.
